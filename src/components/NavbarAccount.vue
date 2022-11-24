@@ -55,12 +55,12 @@ watchEffect(() => {
     :aria-label="$t('connectWallet')"
     @click="modalAccountOpen = true"
   >
-    <span class="hidden sm:block" v-text="$t('connectWallet')" />
+    <span class="hidden sm:block" v-text="`Connect wallet`" />
     <i-ho-login class="-ml-2 -mr-[11px] block align-text-bottom sm:hidden" />
   </BaseButton>
 
   <teleport to="#modal">
-    <ModalAccount
+    <Aa1ModalTatum
       :open="modalAccountOpen"
       :profile="profile"
       @close="modalAccountOpen = false"

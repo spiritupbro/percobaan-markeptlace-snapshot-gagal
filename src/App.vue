@@ -21,9 +21,7 @@ onMounted(async () => init());
         <div
           class="sticky top-0 z-40 h-screen max-w-[60px] overflow-hidden bg-skin-bg transition-all sm:w-auto"
           :class="{ 'max-w-0 sm:max-w-none': !showSidebar }"
-        >
-          <TheSidebar class="border-r border-skin-border" />
-        </div>
+        ></div>
       </div>
       <div
         class="relative flex w-screen min-w-0 shrink-0 flex-col sm:w-auto sm:shrink sm:grow"

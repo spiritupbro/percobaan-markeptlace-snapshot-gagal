@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { shorten } from '@/helpers/utils';
-
 import { useScrollMonitor, useSpaces, useIntl, useI18n } from '@/composables';
 
 const { orderedSpacesByCategory, spacesLoaded } = useSpaces();
@@ -10,7 +9,7 @@ const { setPageTitle } = useI18n();
 
 const loadBy = 12;
 const limit = ref(loadBy);
-
+const modal = ref(false);
 const enableInfiniteScroll = ref(false);
 
 const loadMoreSpaces = () => {
@@ -46,14 +45,14 @@ onMounted(() => {
         v-if="spacesLoaded"
         class="mt-2 whitespace-nowrap text-right text-skin-text xs:mt-0 xs:ml-auto"
       >
-        {{
-          $tc('spaceCount', [
-            formatCompactNumber(orderedSpacesByCategory.length)
-          ])
-        }}
+        <BaseButton :primary="true" class="w-[150px]" @click="modal = true">
+          Create Grants
+        </BaseButton>
       </div>
     </BaseContainer>
-
+    <teleport to="#modal">
+      <Aa2ModalNFT :open="modal" @close="modal = false" />
+    </teleport>
     <BaseContainer :slim="true">
       <TransitionGroup
         name="fade"
@@ -69,14 +68,13 @@ onMounted(() => {
           >
             <BaseBlock
               class="mb-0 flex items-center justify-center text-center transition-all hover:border-skin-text"
-              style="height: 266px"
+              style="height: 400px"
             >
               <div class="relative mb-2 inline-block">
-                <AvatarSpace
-                  :space="space"
-                  symbol-index="space"
-                  size="82"
-                  class="mb-1"
+                <img
+                  src="https://mdbootstrap.com/img/new/standard/city/047.jpg"
+                  class="h-auto max-w-full rounded-lg"
+                  alt=""
                 />
               </div>
               <h3
@@ -90,7 +88,19 @@ onMounted(() => {
                   })
                 }}
               </div>
-              <ButtonFollow class="!mb-0" :space="space" />
+              <ButtonFollow class="my-2" :space="space" />
+              <BaseButton
+                class="my-2 w-[150px] !bg-green"
+                @click="modal = true"
+              >
+                Buy now
+              </BaseButton>
+              <BaseButton
+                class="my-2 w-[150px] !bg-[#FF0000]"
+                @click="modal = true"
+              >
+                Bid
+              </BaseButton>
             </BaseBlock>
           </router-link>
         </div>
